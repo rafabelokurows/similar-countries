@@ -1,0 +1,85 @@
+#install.packages('WDI')
+library(WDI)
+library(tidyverse)
+
+#### Indicadores utilizados ####
+data.frame(indicator = c("NY.GDP.PCAP.KD","SE.XPD.TOTL.GD.ZS",
+                         "GB.XPD.RSDV.GD.ZS","NY.GDP.TOTL.RT.ZS",
+                         "GC.XPN.TOTL.GD.ZS",
+                         "EN.ATM.CO2E.KD.GD",
+                         "GC.DOD.TOTL.GD.ZS",
+                         "SH.XPD.CHEX.GD.ZS",
+                         "SH.XPD.GHED.GD.ZS",
+                         "NE.CON.PRVT.ZS",
+                         "NV.IND.TOTL.ZS",
+                         "MS.MIL.XPND.GD.ZS",
+                         "GC.TAX.TOTL.GD.ZS",
+                         "SM.POP.NETM",
+                         "SN.ITK.MSFI.ZS",
+                         "HD.HCI.OVRL",
+                         "SP.DYN.LE00.IN",
+                         "SP.DYN.IMRT.IN",
+                         "SH.STA.BASS.ZS",
+                         "SP.POP.TOTL",
+                         "SL.UEM.TOTL.ZS",
+                         "SI.POV.LMIC",
+                         "SE.SEC.NENR",
+                         "VC.IHR.PSRC.P5",
+                         "SG.GEN.PARL.ZS"),
+           name = c("GDP per capita (constant 2015 US$)",
+                    "Government expenditure on education, total (% of GDP)",
+                    "Research and development expenditure (% of GDP)",
+                    "Total natural resources rents (% of GDP)",
+                    "Expense (% of GDP)",
+                    "CO2 emissions (kg per 2015 US$ of GDP)",
+                    "Central government debt, total (% of GDP)",
+                    "Current health expenditure (% of GDP)",
+                    "Domestic general government health expenditure (% of GDP)",
+                    "Households and NPISHs final consumption expenditure (% of GDP)",
+                    "Industry (including construction), value added (% of GDP)",
+                    "Military expenditure (% of GDP)",
+                    "Tax revenue (% of GDP)",
+                    "Net migration",
+                    "Prevalence of moderate or severe food insecurity in the population",
+                    "Human capital index (HCI) (scale 0-1)",
+                    "Life expectancy at birth, total (years)",
+                    "Mortality rate, infant (per 1,000 live births)",
+                    "People using at least basic sanitation services (% of population)",
+                    "Population, total",
+                    "Unemployment, total (% of total labor force) (modeled ILO estimate)",
+                    "Poverty headcount ratio at $3.65 a day (2017 PPP) (% of population)",
+                    "School enrollment, secondary (% net)",
+                    "Intentional homicides (per 100,000 people)",
+                    "Proportion of seats held by women in national parliaments"))
+
+#Obtendo os indicadores
+dat = WDI(indicator=c("NY.GDP.PCAP.KD","SE.XPD.TOTL.GD.ZS",
+                      "GB.XPD.RSDV.GD.ZS","NY.GDP.TOTL.RT.ZS",
+                      "GC.XPN.TOTL.GD.ZS",
+                      "EN.ATM.CO2E.KD.GD",
+                      "GC.DOD.TOTL.GD.ZS",
+                      "SH.XPD.CHEX.GD.ZS",
+                      "SH.XPD.GHED.GD.ZS",
+                      "NE.CON.PRVT.ZS",
+                      "NV.IND.TOTL.ZS",
+                      "MS.MIL.XPND.GD.ZS",
+                      "GC.TAX.TOTL.GD.ZS",
+                      "SM.POP.NETM",
+                      "SN.ITK.MSFI.ZS",
+                      "HD.HCI.OVRL",
+                      "SP.DYN.LE00.IN",
+                      "SP.DYN.IMRT.IN",
+                      "SH.STA.BASS.ZS",
+                      "SP.POP.TOTL",
+                      "SL.UEM.TOTL.ZS",
+                      "SI.POV.LMIC",
+                      "SE.SEC.NENR",
+                      "VC.IHR.PSRC.P5",
+                      "SG.GEN.PARL.ZS"),country='all', start=1990, end=2022,extra = T)
+
+write.csv(dat,"worldbank 2911.csv",row.names = F)
+# 
+# dat4 = dat3 %>% pivot_longer(cols=c(NY.GDP.PCAP.KD:SH.XPD.CHEX.GD.ZS))
+#library(ggplot2)
+# ggplot(dat4, aes(year, value, color=country)) + geom_line(size=1.2) + 
+#   xlab('Year') + ylab('GDP per capita') +facet_wrap(~name,scales = "free")+scale_color_brewer(palette = "Dark2")
